@@ -1,5 +1,5 @@
 -- 1. Open MySQL Workbench and login to the database server
--- 2. Save your work in a file named db_tables_exercises.sql
+-- 2. Save your work in a file named db_tables_exercises.sql .
 
 -- 3. List all the databases
 SHOW DATABASES;
