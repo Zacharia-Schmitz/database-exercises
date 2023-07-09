@@ -75,3 +75,6 @@ SELECT DISTINCT *
 FROM employees
 WHERE last_name LIKE '%q%' 
 AND last_name NOT LIKE '%qu%';
+
+-- Testing some now push functions
+
