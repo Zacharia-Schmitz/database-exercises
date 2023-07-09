@@ -105,4 +105,6 @@ Casting allows converting one data type to another.
 Example: SELECT CAST(quantity AS VARCHAR) FROM inventory;
 
 -- testing a git push from my home windows PC
+
+-- testing another git push after setting up my account information on my windows PC
  
