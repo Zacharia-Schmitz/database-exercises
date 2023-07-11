@@ -1,1 +1,1 @@
-This is a repo for SQL Scripts that I made during Codeup.
+This is a repo for exercises during Codeup.
