@@ -74,7 +74,7 @@ What is the highest number of times a username shows up? Bonus: How many duplica
 -- QUERY 2 adds up the username_count column, meaning if it was given out 6 times, it is 6 usernames (27403)
 
 -- QUERY 1 															
-WITH duplicates AS (                                       -- Generates a Common table expression (CTE) to create a temporary named result to be used again
+WITH duplicates AS (          -- Generates a Common table expression (CTE) to create a temporary named result to be used again
 SELECT
 CONCAT(
 	LOWER(SUBSTR(first_name, 1, 1)),
@@ -91,7 +91,7 @@ username,
 username_count,
 (SELECT COUNT(*) FROM duplicates) AS total_duplicate_usernames
 FROM duplicates
-ORDER BY username_count DESC; 
+ORDER BY username_count DESC;
 
 
 -- QUERY 2
