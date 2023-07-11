@@ -226,9 +226,9 @@ SELECT CONCAT(e.first_name, ' ', e.last_name) AS Employee, d.dept_name AS Deptar
         ON e.emp_no = de.emp_no
     JOIN departments AS d
         ON de.dept_no = d.dept_no
-    JOIN dept_manager AS dm
-        ON de.dept_no = dm.dept_no
-    JOIN employees AS m
+    JOIN dept_manager AS dm                
+        ON de.dept_no = dm.dept_no          -- Had to do SELF JOIN (join the the same table twice)
+    JOIN employees AS m                     -- in order to reuse the first_name and last_name fields
         ON dm.emp_no = m.emp_no
 WHERE de.to_date = '9999-01-01'
 AND dm.to_date = '9999-01-01';
