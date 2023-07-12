@@ -58,19 +58,23 @@ Select
     END AS Department_Name -- Changes dept_name and outputs as a new column
 FROM departments;
 
-Select
-    dept_name,
-    CASE
-        WHEN dept_name IN ('reasearch', 'development') THEN 'R&D'
-        ELSE dept_name
-    END AS Department_Name -- Changes dept_name and outputs new column
-FROM departments;
-
 -- --------------------------------- EXERCISES
 
 /* 1. Write a query that returns all employees, their department number, their start date, 
  their end date, and a new column 'is_current_employee' that is a 1 if the employee is still
  with the company and 0 if not. DO NOT WORRY ABOUT DUPLICATE EMPLOYEES. */
+
+USE employees;
+
+-- Table with no employee information
+
+SELECT
+    emp_no,
+    dept_no,
+    from_date as start_date,
+    to_date as end_date,
+    if (to_date > now(), 1, 0) as is_current_employee
+from dept_emp;
 
 -- This table uses a CASE statement
 
@@ -82,7 +86,7 @@ SELECT
     de.from_date AS start_date,
     de.to_date AS end_date,
     CASE
-        WHEN de.to_date = '9999-01-01' THEN 1 -- 
+        WHEN de.to_date = '9999-01-01' THEN 1
         ELSE 0
     END AS is_current_employee
 FROM dept_emp de
@@ -120,17 +124,18 @@ FROM employees;
 
 /* 3. How many employees (current or previous) were born in each decade? */
 
+SELECT MIN(birth_date), MAX(birth_date) FROM employees;
+
+-- MIN: 1952, MAX: 1965
+
 SELECT
-    first_name,
-    last_name,
-    birth_date,
+    COUNT(*) AS birth_by_decade,
     CASE
-        WHEN birth_date LIKE '194%' THEN '1940s'
         WHEN birth_date LIKE '195%' THEN '1950s'
         WHEN birth_date LIKE '196%' THEN '1960s'
-        ELSE 'CREATE DECADE'
-    END AS Decade
-FROM employees;
+    END AS decade
+FROM employees
+GROUP BY decade;
 
 /* 4. What is the current average salary for each of the following department groups: R&D, 
  Sales & Marketing, Prod & QM, Finance & HR, Customer Service? */
@@ -139,10 +144,7 @@ SELECT
     CASE
         WHEN d.dept_name IN ('Research', 'Development') THEN 'R&D'
         WHEN d.dept_name IN ('Sales', 'Marketing') THEN 'Sales & Marketing'
-        WHEN d.dept_name IN (
-            'Production',
-            'Quality Management'
-        ) THEN 'Prod & QM'
+        WHEN d.dept_name IN ('Production', 'Quality Management') THEN 'Prod & QM'
         WHEN d.dept_name IN ('Finance', 'Human Resources') THEN 'Finance & HR'
         ELSE d.dept_name
     END AS merged_dep,
@@ -150,7 +152,7 @@ SELECT
 FROM departments d
     JOIN dept_emp de ON d.dept_no = de.dept_no
     JOIN salaries s ON de.emp_no = s.emp_no
-WHERE
+WHERE 
     de.to_date = '9999-01-01'
     AND s.to_date = '9999-01-01'
 GROUP BY merged_dep;
