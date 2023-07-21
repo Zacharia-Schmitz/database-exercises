@@ -1,1 +1,1 @@
-This is a repo for exercises during Codeup.
+# Repository for SQL database exercises accomplished during Codeup
